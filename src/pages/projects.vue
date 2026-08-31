@@ -2,7 +2,7 @@
 
 <template>
     <v-container>
-        <h1>hello vue</h1>
+        <h1>hello projects</h1>
     </v-container>
 </template>
 
