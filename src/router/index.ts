@@ -9,6 +9,13 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Index from '@/pages/index.vue';
 import Projects from '@/pages/projects.vue';
 
+declare module 'vue-router' {
+    interface RouteMeta {
+        showNav?: boolean;
+        icon?: string;
+    }
+}
+
 // Use hash-based navigation so the built site works as a plain static
 // bundle (index.html + assets) without server-side URL rewrites.
 const router = createRouter({

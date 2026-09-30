@@ -45,7 +45,7 @@ const openLink = (link: string) => window.open(link, '_blank');
                     v-if="route.meta.showNav"
                     :prepend-icon="route.meta.icon"
                     :active="isActive"
-                    @click="navigate"
+                    @click="navigate($event as MouseEvent)"
                 >
                     {{ route.name }}
                 </v-list-item>
