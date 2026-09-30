@@ -20,6 +20,7 @@ const router = createRouter({
             name: '主页',
             meta: {
                 showNav: true,
+                icon: 'mdi-home',
             },
         },
         {
@@ -28,6 +29,7 @@ const router = createRouter({
             name: '项目',
             meta: {
                 showNav: true,
+                icon: 'mdi-view-dashboard',
             },
         },
     ],

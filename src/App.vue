@@ -26,23 +26,27 @@ router.afterEach(() => {
         <Navbar />
 
         <v-main>
+            <!-- 加载中提示 -->
+            <v-progress-linear
+                :active="isLoading"
+                :indeterminate="isLoading"
+                location="bottom"
+                absolute
+            />
+
             <router-view v-slot="{ Component }">
                 <transition name="fade" mode="out-in">
                     <component :is="Component" />
                 </transition>
             </router-view>
-
-            <!-- 加载中提示 -->
-            <v-progress-circular indeterminate :size="30" class="loading-tip" v-if="isLoading" />
         </v-main>
     </v-app>
 </template>
 
 <style scoped>
 .loading-tip {
-    position: fixed;
-    top: 5px;
-    right: 5px;
+    position: relative;
+    top: 0;
     z-index: 10000;
 }
 
