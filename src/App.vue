@@ -5,6 +5,12 @@ import { useDisplay, useGoTo, useTheme } from 'vuetify';
 import { NavbarLinks } from './profile';
 import { useAppStore, type ThemeName } from './stores/app';
 
+const themeOptions: { value: ThemeName; label: string; icon: string }[] = [
+    { value: 'system', label: '跟随系统', icon: 'mdi-theme-light-dark' },
+    { value: 'light', label: '亮色', icon: 'mdi-weather-sunny' },
+    { value: 'dark', label: '暗色', icon: 'mdi-weather-night' },
+];
+
 const router = useRouter();
 const display = useDisplay();
 const goTo = useGoTo();
@@ -13,13 +19,6 @@ const appStore = useAppStore();
 
 const isDrawerOpen = ref(false);
 const isLoading = ref(false);
-
-const themeOptions: { value: ThemeName; label: string; icon: string }[] = [
-    { value: 'system', label: '跟随系统', icon: 'mdi-theme-light-dark' },
-    { value: 'light', label: '亮色', icon: 'mdi-weather-sunny' },
-    { value: 'dark', label: '暗色', icon: 'mdi-weather-night' },
-];
-
 const themeIcon = computed(
     () => themeOptions.find(option => option.value === appStore.theme)?.icon ?? 'mdi-theme-light-dark',
 );
@@ -29,8 +28,6 @@ watch(
     name => theme.change(name),
     { immediate: true },
 );
-
-const openLink = (link: string) => window.open(link, '_blank');
 
 router.beforeEach((from, to, next) => {
     goTo(0, { duration: 300 });
@@ -61,7 +58,7 @@ onMounted(() => {
                 :icon="link.icon"
                 :title="link.name"
                 :key="link.name"
-                @click="openLink(link.link)"
+                :href="link.link"
                 variant="text"
             />
 
