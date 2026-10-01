@@ -2,15 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDisplay, useGoTo } from 'vuetify';
-import { type Link } from './types/Link.ts';
-
-const links: Link[] = [
-    {
-        name: 'GitHub',
-        link: 'https://github.com/lrs2187',
-        icon: 'mdi-github',
-    },
-];
+import { NavbarLinks } from './profile';
 
 const router = useRouter();
 const display = useDisplay();
@@ -46,7 +38,7 @@ onMounted(() => {
             <v-toolbar-title>lrs2187</v-toolbar-title>
 
             <v-btn
-                v-for="link of links"
+                v-for="link of NavbarLinks"
                 :icon="link.icon"
                 :title="link.name"
                 :key="link.name"
@@ -56,7 +48,7 @@ onMounted(() => {
         </v-app-bar>
 
         <v-navigation-drawer v-model="isDrawerOpen" :temporary="$vuetify.display.mobile ? true : undefined">
-            <v-list>
+            <v-list nav>
                 <v-list-item
                     v-for="route in router.getRoutes().filter(x => x.meta.showNav)"
                     :prepend-icon="route.meta.icon"
@@ -67,14 +59,18 @@ onMounted(() => {
             </v-list>
         </v-navigation-drawer>
 
-        <v-main>
+        <v-main class="flex flex-col">
             <v-progress-linear :active="isLoading" :indeterminate="isLoading" location="bottom" absolute />
 
-            <router-view v-slot="{ Component }">
+            <router-view v-slot="{ Component }" class="flex-1">
                 <v-fade-transition hide-on-leave>
                     <component :is="Component" />
                 </v-fade-transition>
             </router-view>
+
+            <v-footer class="flex-0">
+                Copyright by lrs2187.
+            </v-footer>
         </v-main>
     </v-app>
 </template>

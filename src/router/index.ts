@@ -1,13 +1,7 @@
-/**
- * router/index.ts
- *
- * Manual routes for ./src/pages/*.vue
- */
-
-// Composables
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Index from '@/pages/index.vue';
 import Projects from '@/pages/projects.vue';
+import NotFound from '@/pages/not-found.vue';
 
 declare module 'vue-router' {
     interface RouteMeta {
@@ -16,8 +10,6 @@ declare module 'vue-router' {
     }
 }
 
-// Use hash-based navigation so the built site works as a plain static
-// bundle (index.html + assets) without server-side URL rewrites.
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
@@ -38,6 +30,15 @@ const router = createRouter({
                 showNav: true,
                 icon: 'mdi-view-dashboard',
             },
+        },
+        {
+            path: '/404',
+            name: '404',
+            component: NotFound,
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            redirect: '/404',
         },
     ],
 });
