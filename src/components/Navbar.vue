@@ -2,8 +2,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const router = useRouter();
-
 interface Link {
     name: string;
     link: string;
@@ -18,7 +16,9 @@ const links: Link[] = [
     },
 ];
 
+const router = useRouter();
 const isDrawerOpen = ref(false);
+
 const openLink = (link: string) => window.open(link, '_blank');
 </script>
 

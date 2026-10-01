@@ -7,14 +7,12 @@ const router = useRouter();
 const isLoading = ref(false);
 
 router.beforeEach((from, to, next) => {
-    console.log('导航开始。');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     isLoading.value = true;
     next();
 });
 
 router.afterEach(() => {
-    console.log('导航结束。');
     setTimeout(() => {
         isLoading.value = false;
     }, 500);
@@ -42,6 +40,10 @@ router.afterEach(() => {
         </v-main>
     </v-app>
 </template>
+
+<style>
+@reference "@/styles/tailwind.css";
+</style>
 
 <style scoped>
 .loading-tip {

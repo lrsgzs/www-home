@@ -2,10 +2,14 @@
 
 <template>
     <v-container>
-        <h1>hello vue</h1>
+        <div class="flex flex-1">
+            <v-avatar image="/avatar.jpg" size="128" />
+            <div class="flex flex-col">
+                <span>lrs2187</span>
+                def
+            </div>
+        </div>
     </v-container>
 </template>
 
-<style scoped>
-@reference "@/styles/tailwind.css";
-</style>
+<style scoped></style>

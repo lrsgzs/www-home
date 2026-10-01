@@ -6,6 +6,4 @@
     </v-container>
 </template>
 
-<style scoped>
-@reference "@/styles/tailwind.css";
-</style>
+<style scoped></style>
