@@ -1,15 +1,34 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useDisplay, useGoTo } from 'vuetify';
+import { useDisplay, useGoTo, useTheme } from 'vuetify';
 import { NavbarLinks } from './profile';
+import { useAppStore, type ThemeName } from './stores/app';
 
 const router = useRouter();
 const display = useDisplay();
 const goTo = useGoTo();
+const theme = useTheme();
+const appStore = useAppStore();
 
 const isDrawerOpen = ref(false);
 const isLoading = ref(false);
+
+const themeOptions: { value: ThemeName; label: string; icon: string }[] = [
+    { value: 'system', label: '跟随系统', icon: 'mdi-theme-light-dark' },
+    { value: 'light', label: '亮色', icon: 'mdi-weather-sunny' },
+    { value: 'dark', label: '暗色', icon: 'mdi-weather-night' },
+];
+
+const themeIcon = computed(
+    () => themeOptions.find(option => option.value === appStore.theme)?.icon ?? 'mdi-theme-light-dark',
+);
+
+watch(
+    () => appStore.theme,
+    name => theme.change(name),
+    { immediate: true },
+);
 
 const openLink = (link: string) => window.open(link, '_blank');
 
@@ -45,6 +64,23 @@ onMounted(() => {
                 @click="openLink(link.link)"
                 variant="text"
             />
+
+            <v-menu>
+                <template #activator="{ props }">
+                    <v-btn v-bind="props" :icon="themeIcon" title="主题" variant="text" />
+                </template>
+
+                <v-list>
+                    <v-list-item
+                        v-for="option in themeOptions"
+                        :key="option.value"
+                        :active="appStore.theme === option.value"
+                        :prepend-icon="option.icon"
+                        :title="option.label"
+                        @click="appStore.theme = option.value"
+                    />
+                </v-list>
+            </v-menu>
         </v-app-bar>
 
         <v-navigation-drawer v-model="isDrawerOpen" :temporary="$vuetify.display.mobile ? true : undefined">
@@ -68,9 +104,7 @@ onMounted(() => {
                 </v-fade-transition>
             </router-view>
 
-            <v-footer class="flex-0">
-                Copyright by lrs2187.
-            </v-footer>
+            <v-footer class="flex-0"> Copyright by lrs2187. </v-footer>
         </v-main>
     </v-app>
 </template>
