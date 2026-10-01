@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDisplay, useGoTo, useTheme } from 'vuetify';
-import { NavbarLinks } from './profile';
+import { NavbarLinks, Projects } from './profile';
 import { useAppStore, type ThemeName } from './stores/app';
 
 const themeOptions: { value: ThemeName; label: string; icon: string }[] = [

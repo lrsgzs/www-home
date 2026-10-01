@@ -8,13 +8,17 @@ const project = props.project;
 </script>
 
 <template>
-    <v-card :title="project.name" :subtitle="project.description">
+    <v-card
+        :title="project.name"
+        :subtitle="project.description"
+        :to="`/projects/${project.id}`"
+    >
         <template v-slot:prepend>
-            <v-avatar :image="project.icon" rounded="0px" />
+            <img :src="project.icon" rounded="0px" width="48" />
         </template>
 
         <v-card-text>
-            <p v-for="feat in project.features">{{ feat }}</p>
+            <v-chip v-for="feat in project.tags" class="m-1">{{ feat }}</v-chip>
         </v-card-text>
     </v-card>
 </template>

@@ -45,6 +45,7 @@ export interface Project {
     id: string;
     icon: string;
     description: string;
+    tags: string[];
     features: string[];
     links: Link[];
     main: boolean;
@@ -56,6 +57,7 @@ export const Projects: Project[] = [
         id: 'sai',
         icon: '/projects/sai.png',
         description: 'ClassIsland 自动化进化',
+        tags: ['C#', 'ClassIsland 插件'],
         features: [
             '使用 Blockly 构建自动化工作流',
             '复用 ClassIsland 规则集、行动组'

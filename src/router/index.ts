@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Index from '@/pages/index.vue';
-import Projects from '@/pages/projects.vue';
+import ProjectsPage from '@/pages/projects.vue';
+import Project from '@/pages/project.vue';
 import NotFound from '@/pages/not-found.vue';
 
 declare module 'vue-router' {
@@ -24,10 +25,19 @@ const router = createRouter({
         },
         {
             path: '/projects',
-            component: Projects,
+            component: ProjectsPage,
             name: '项目',
             meta: {
                 showNav: true,
+                icon: 'mdi-view-dashboard',
+            },
+        },
+        {
+            path: '/projects/:id',
+            component: Project,
+            name: '项目详情',
+            meta: {
+                showNav: false,
                 icon: 'mdi-view-dashboard',
             },
         },
